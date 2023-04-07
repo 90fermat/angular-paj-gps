@@ -1,0 +1,9 @@
+.navbar {
+  overflow: hidden;
+  background-color:aquamarine;
+  
+  top: 0;
+  right: 0;
+  left: 0;
+  display: block;
+}

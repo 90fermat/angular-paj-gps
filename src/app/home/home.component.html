@@ -1,0 +1,21 @@
+<mgl-map *ngIf=" loginService.isLogged else elseBlock"
+      [style]="
+        'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL'
+      "
+      [zoom]="[5]"
+      [center]="[-65.017, -16.457]"
+    >
+    <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lgnLat]="[devicePos.lgn, devicePos.lat]">
+      <div
+        (click)="alert(searchDeviceName(devicePos.id))"
+        class="marker"
+        [ngStyle]="{
+          'background-color': searchDeviceColor(devicePos.id),
+          width: 'px',
+          height: 'px'
+        }"
+      ></div>
+    </mgl-marker>
+  </mgl-map>
+
+  <ng-template #elseBlock> <p>Please Login first</p></ng-template>
