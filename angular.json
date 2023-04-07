@@ -19,8 +19,7 @@
             "polyfills": "src/polyfills.ts",
             "assets": [],
             "styles": [
-              "src/global_styles.css",
-              "./node_modules/maplibre-gl/dist/maplibre-gl.css"
+              "src/global_styles.css"
             ],
             "scripts": []
           },

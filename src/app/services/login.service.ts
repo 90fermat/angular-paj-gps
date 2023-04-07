@@ -41,7 +41,7 @@ export class LoginService {
     }
   }
 
-  login(user: User) {
+  login(user: any) {
     const url = 'https://connect.paj-gps.de/api/login';
     const httpOptions = {
       headers: new HttpHeaders({
@@ -53,7 +53,7 @@ export class LoginService {
       params: new HttpParams({encoder: new CustomHttpParamEncoder()}).append('email', user.email)
         .append('password', user.password)
     };
-    return this.http.post<any>(url, {}, httpOptions).pipe(map(data => {
+    return this.http.post<any>(url, '', httpOptions).pipe(map(data => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       let loginDetails: LoginDetails = data.success;
       sessionStorage.setItem('currentUser', JSON.stringify(loginDetails));

@@ -11,6 +11,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginService } from './services/login.service';
 import { TokenInterceptor } from './helpers/token-interceptor';
+import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { TokenInterceptor } from './helpers/token-interceptor';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    NgxMapLibreGLModule
   ],
   declarations: [
     AppComponent,
