@@ -51,12 +51,11 @@ export class LoginService {
      
       }),
       params: new HttpParams({encoder: new CustomHttpParamEncoder()}).append('email', user.email)
-        .append('password', user.password),
-
-      withCredentials: true
+        .append('password', user.password)
     };
-    return this.http.post<any>(url, {}, httpOptions).pipe(map(loginDetails => {
+    return this.http.post<any>(url, {}, httpOptions).pipe(map(data => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
+      let loginDetails: LoginDetails = data.success;
       sessionStorage.setItem('currentUser', JSON.stringify(loginDetails));
       const tokenStr = 'Bearer ' + loginDetails.token;
       sessionStorage.setItem('token', tokenStr);
@@ -64,11 +63,12 @@ export class LoginService {
       this.isLoggedField = true;
       return loginDetails;
     })).subscribe({
-      error:(error) => this.handleError(error)
+      next: (val) => console.log("response", val),
+      error: this.handleError
     });
   }
 
-  private handleError(error: HttpErrorResponse) {
+  handleError = (error: HttpErrorResponse) => {
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {
