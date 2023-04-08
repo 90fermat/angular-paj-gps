@@ -1,21 +1,32 @@
-<mgl-map *ngIf=" loginService.isLogged && devicesLastPositions else elseBlock"
-      [style]="
-        'https://api.maptiler.com/maps/streets-v2/style.json?key=Cxd5P0gT4hBYDLl07bL2'
-      "
-      [zoom]="[9]"
-      [center]="[7.11, 50.11]"
-    >
-    <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lngLat]="[devicePos.lng, devicePos.lat]">
-      <div
-        (click)="alert(searchDeviceName(devicePos.iddevice))"
-        class="marker"
-        [ngStyle]="{
-          'background-color': searchDeviceColor(devicePos.iddevice),
-          width: '30px',
-          height: '30px'
-        }"
-      >{{searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase()}}</div>
-    </mgl-marker>
-  </mgl-map>
+<div class="container" *ngIf="devices else elseContainerBlock">
+    <div class="menu">
+        <h2>Devices</h2>
+        <a *ngFor="let device of devices"
+           (click)="centerMapTo(device)">
+            {{ device.name }}
+        </a>
+    </div>
 
-  <ng-template #elseBlock> <p>Please Login first</p></ng-template>
+    <mgl-map *ngIf=" loginService.isLogged && devicesLastPositions else elseBlock"
+          [style]="
+            'https://api.maptiler.com/maps/streets-v2/style.json?key=Cxd5P0gT4hBYDLl07bL2'
+          "
+          [zoom]="[zoom]"
+          [center]="center"
+          (mapLoad)="map = $event"
+        >
+        <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lngLat]="[devicePos.lng, devicePos.lat]">
+          <div
+            (click)="alert(searchDeviceName(devicePos.iddevice))"
+            class="marker"
+            [ngStyle]="{
+              'background-color': searchDeviceColor(devicePos.iddevice),
+              width: '30px',
+              height: '30px'
+            }"
+          >{{searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase()}}</div>
+        </mgl-marker>
+    </mgl-map>
+</div>
+  <ng-template #elseBlock><div class="loader"></div></ng-template>
+  <ng-template #elseContainerBlock><div class="loader"></div></ng-template>

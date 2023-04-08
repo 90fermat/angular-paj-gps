@@ -1,11 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
-import { User } from '../models/user';
 import { Device } from '../models/device';
 import { HttpClient } from '@angular/common/http';
-import { Feature } from 'maplibre-gl';
+import { Map, LngLatLike } from 'maplibre-gl';
 import { map } from 'rxjs/operators';
-import { async, interval, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +12,13 @@ import { async, interval, firstValueFrom } from 'rxjs';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
-  public devices: Device[]
-  public devicesLastPositions: DevicePos[]
+
+  map: Map;
+  zoom: number = 9;
+
+  center: LngLatLike = { lng: 7.11, lat: 50.11 }
+  devices: Device[]
+  devicesLastPositions: DevicePos[]
   
   private baseUrl: String = 'https://connect.paj-gps.de/api/';
 
@@ -39,16 +42,6 @@ export class HomeComponent implements OnInit {
 
   async getAllDevices() {
     if(this.loginService.isLogged) {
-    /*return this.http.get<any>(this.baseUrl + 'device')
-  .subscribe({
-    next(response){
-      this.devices = response.success
-      console.log("Devices", this.devices)
-    },
-    error(error) {
-      console.log(error.error)
-    }
-  })*/
       return firstValueFrom(this.http.get<any>(this.baseUrl + 'device')
           .pipe(map(response => response.success)))
     } else {
@@ -63,13 +56,26 @@ export class HomeComponent implements OnInit {
   }
 
   searchDeviceColor(id: number) {
-    //return this.devices.then(value => value.find((device) => id === `${device.id}`).spurfarbe)
     return this.devices.find((device) => id === device.id).spurfarbe
   }
 
   searchDeviceName(id: number) {
-    //return this.devices.then(value => value.find((device) => id === `${device.id}`).name)
     return this.devices.find((device) => id === device.id).name
+  }
+
+  centerMapTo(device: Device) {
+    this.center = this._devicePosToLngLatLike(
+        this.devicesLastPositions.find(dev => device.id === dev.iddevice)
+    )
+    this.zoom = 14;
+  }
+
+  _devicePosToLngLatLike(devicePos: DevicePos): LngLatLike {
+    if (devicePos) {
+      return { lng: devicePos.lng, lat: devicePos.lat }
+    } else  {
+      alert("The Device don't has a Last Tracked Position")
+    }
   }
 
   alert(message) {
