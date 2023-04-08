@@ -17,7 +17,7 @@
         >
         <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lngLat]="[devicePos.lng, devicePos.lat]">
           <div
-            (click)="alert(searchDeviceName(devicePos.iddevice))"
+            (click)="showLastPoints(devicePos.iddevice)"
             class="marker"
             [ngStyle]="{
               'background-color': searchDeviceColor(devicePos.iddevice),
@@ -26,6 +26,23 @@
             }"
           >{{searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase()}}</div>
         </mgl-marker>
+        <mgl-geojson-source *ngIf="geometry" id="oneline">
+            <mgl-feature [geometry]="geometry"></mgl-feature>
+        </mgl-geojson-source>
+        <mgl-layer *ngIf="geometry"
+            id="route"
+            type="line"
+            source="oneline"
+            [layout]="{
+              'line-join': 'round',
+              'line-cap': 'round'
+            }"
+            [paint]="{
+              'line-color': '#888',
+              'line-width': 8
+            }"
+        >
+        </mgl-layer>
     </mgl-map>
 </div>
   <ng-template #elseBlock><div class="loader"></div></ng-template>
