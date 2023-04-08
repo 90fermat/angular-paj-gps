@@ -7,3 +7,15 @@
   left: 0;
   display: block;
 }
+
+.heading {
+  margin: 0;
+  padding: 0;
+  background-color: #1976d2;
+  color: white;
+}
+
+.heading > h1 {
+  padding: 20px;
+  margin: 0;
+}

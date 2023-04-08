@@ -82,14 +82,13 @@ export class HomeComponent implements OnInit {
       type: 'LineString',
       coordinates: this.devicesLastPoints.find(value => value.id === deviceID).last_points
     }, 1000)
-
-    console.log("geometry:", this.geometry.coordinates)
   }
+
   _showLastPoints(deviceID: number) {
     this._clearGeometry()
     setTimeout(() => this.geometry = {
       type: 'LineString',
-      coordinates: this.devicesLastPoints.find(value => value.id === deviceID).last_points
+      coordinates: this.devicesLastPoints.find(value => value.id === deviceID).last_points,
     }, 1000)
   }
 
