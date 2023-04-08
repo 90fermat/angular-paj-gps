@@ -1,20 +1,20 @@
-<mgl-map *ngIf=" loginService.isLogged else elseBlock"
+<mgl-map *ngIf=" loginService.isLogged && devicesLastPositions else elseBlock"
       [style]="
-        'https://demotiles.maplibre.org/style.json'
+        'https://api.maptiler.com/maps/streets-v2/style.json?key=Cxd5P0gT4hBYDLl07bL2'
       "
-      [zoom]="[5]"
-      [center]="[-65.017, -16.457]"
+      [zoom]="[9]"
+      [center]="[7.11, 50.11]"
     >
-    <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lgnLat]="[devicePos.lgn, devicePos.lat]">
+    <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lngLat]="[devicePos.lng, devicePos.lat]">
       <div
-        (click)="alert(searchDeviceName(devicePos.id))"
+        (click)="alert(searchDeviceName(devicePos.iddevice))"
         class="marker"
         [ngStyle]="{
-          'background-color': searchDeviceColor(devicePos.id),
-          width: 'px',
-          height: 'px'
+          'background-color': searchDeviceColor(devicePos.iddevice),
+          width: '30px',
+          height: '30px'
         }"
-      ></div>
+      >{{searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase()}}</div>
     </mgl-marker>
   </mgl-map>
 
