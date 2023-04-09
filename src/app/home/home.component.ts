@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../services/login.service';
 import { Device } from '../models/device';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Map, LngLatLike } from 'maplibre-gl';
 import { map } from 'rxjs/operators';
 import { firstValueFrom } from 'rxjs';
-import {CustomHttpParamEncoder} from "../helpers/custom-encoder";
+import { CustomHttpParamEncoder } from "../helpers/custom-encoder";
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-home',
@@ -115,6 +116,13 @@ export class HomeComponent implements OnInit {
   alert(message) {
     alert(message)
   }
+
+  printCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition();
+
+    console.log('Current position:', coordinates);
+  };
+
 }
 
 export interface DevicePos {

@@ -24,8 +24,12 @@
               width: '30px',
               height: '30px'
             }"
-          >{{searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase()}}</div>
+          >{{ searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase() }}</div>
         </mgl-marker>
+        <mgl-control mglGeolocate
+            [positionOptions]="{ enableHighAccuracy: true }"
+            [trackUserLocation]="true">
+        </mgl-control>
         <mgl-geojson-source *ngIf="geometry" id="oneline">
             <mgl-feature [geometry]="geometry"></mgl-feature>
         </mgl-geojson-source>

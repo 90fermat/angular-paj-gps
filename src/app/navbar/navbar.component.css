@@ -1,21 +1,16 @@
-.navbar {
-  overflow: hidden;
-  background-color:aquamarine;
-  
-  top: 0;
-  right: 0;
-  left: 0;
-  display: block;
-}
-
-.heading {
+nav {
   margin: 0;
   padding: 0;
   background-color: #1976d2;
   color: white;
 }
 
-.heading > h1 {
+nav a {
+  text-decoration: none;
+  color: white;
+}
+
+nav > a > h1 {
   padding: 20px;
   margin: 0;
 }
