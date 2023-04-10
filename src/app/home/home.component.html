@@ -1,21 +1,53 @@
-<mgl-map *ngIf=" loginService.isLogged else elseBlock"
-      [style]="
-        'https://demotiles.maplibre.org/style.json'
-      "
-      [zoom]="[5]"
-      [center]="[-65.017, -16.457]"
-    >
-    <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lgnLat]="[devicePos.lgn, devicePos.lat]">
-      <div
-        (click)="alert(searchDeviceName(devicePos.id))"
-        class="marker"
-        [ngStyle]="{
-          'background-color': searchDeviceColor(devicePos.id),
-          width: 'px',
-          height: 'px'
-        }"
-      ></div>
-    </mgl-marker>
-  </mgl-map>
+<div class="container" *ngIf="devices else elseContainerBlock">
+    <div class="menu">
+        <h2>Devices</h2>
+        <a *ngFor="let device of devices"
+           (click)="centerMapTo(device)">
+            {{ device.name }}
+        </a>
+    </div>
 
-  <ng-template #elseBlock> <p>Please Login first</p></ng-template>
+    <mgl-map *ngIf=" loginService.isLogged && devicesLastPositions else elseBlock"
+          [style]="
+            'https://api.maptiler.com/maps/streets-v2/style.json?key=Cxd5P0gT4hBYDLl07bL2'
+          "
+          [zoom]="[zoom]"
+          [center]="center"
+          (mapLoad)="map = $event"
+        >
+        <mgl-marker *ngFor="let devicePos of devicesLastPositions" [lngLat]="[devicePos.lng, devicePos.lat]">
+          <div
+            (click)="showLastPoints(devicePos.iddevice)"
+            class="marker"
+            [ngStyle]="{
+              'background-color': searchDeviceColor(devicePos.iddevice),
+              width: '30px',
+              height: '30px'
+            }"
+          >{{ searchDeviceName(devicePos.iddevice).charAt(0).toUpperCase() }}</div>
+        </mgl-marker>
+        <mgl-control mglGeolocate
+            [positionOptions]="{ enableHighAccuracy: true }"
+            [trackUserLocation]="true">
+        </mgl-control>
+        <mgl-geojson-source *ngIf="geometry" id="oneline">
+            <mgl-feature [geometry]="geometry"></mgl-feature>
+        </mgl-geojson-source>
+        <mgl-layer *ngIf="geometry"
+            id="route"
+            type="line"
+            source="oneline"
+            [layout]="{
+              'line-join': 'miter',
+              'line-cap': 'round'
+            }"
+            [paint]="{
+              'line-color': '#888',
+              'line-width': 8
+            }"
+        >
+        </mgl-layer>
+    </mgl-map>
+</div>
+  <ng-template #elseBlock><div class="loader"></div></ng-template>
+  <ng-template #elseContainerBlock><div class="loader"></div></ng-template>

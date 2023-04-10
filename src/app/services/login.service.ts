@@ -5,10 +5,8 @@ import {
   HttpErrorResponse,
   HttpHeaders,
   HttpParameterCodec,
-  HttpParams,
-  HttpResponse
+  HttpParams
 } from '@angular/common/http';
-import { User } from '../models/user';
 import { map } from 'rxjs/operators';
 import { CustomHttpParamEncoder } from '../helpers/custom-encoder'
 import { LoginDetails } from '../models/login-details';
@@ -28,7 +26,6 @@ export class LoginService {
   public currentUser: Observable<LoginDetails>;
   public  encoder: HttpParameterCodec;
 
-  private userName: string;
   private isLoggedField = false;
 
   constructor(

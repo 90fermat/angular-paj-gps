@@ -1,4 +1,62 @@
 mgl-map {
+  border: 16px solid #f3f3f3;
   width: 100%;
   height: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 80%;
+}
+
+.menu {
+  width: 30%;
+  justify-content: center;
+}
+
+.menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.menu a:hover {
+  background-color: #ccc;
+}
+
+.menu a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.marker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  justify-content: center;
+  text-align: center;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-bottom: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

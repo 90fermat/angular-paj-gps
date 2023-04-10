@@ -16,6 +16,7 @@
             "outputPath": "dist/demo",
             "index": "src/index.html",
             "main": "src/main.ts",
+            "tsConfig": "./tsconfig.json",
             "polyfills": "src/polyfills.ts",
             "assets": [],
             "styles": [
@@ -82,5 +83,8 @@
       }
     }
   },
-  "defaultProject": "demo"
+  "defaultProject": "demo",
+  "cli": {
+    "analytics": false
+  }
 }

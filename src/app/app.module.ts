@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
-import { MenuComponent } from './menu/menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from './app-routing-module'
@@ -26,7 +25,6 @@ import { NgxMapLibreGLModule } from '@maplibre/ngx-maplibre-gl';
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    MenuComponent,
     FooterComponent
   ],
   providers: [

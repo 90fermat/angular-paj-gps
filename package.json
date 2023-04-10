@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^15.2.6",
     "@angular/platform-browser-dynamic": "^15.2.6",
     "@angular/router": "^15.2.6",
+    "@capacitor/geolocation": "^4.1.0",
     "@maplibre/ngx-maplibre-gl": "^13.0.0",
     "maplibre-gl": "^2.4.0",
     "rxjs": "^7.8.0",
